@@ -332,8 +332,11 @@ type GameType int
 
 // Valid GameType values
 const (
-	GameTypeGame GameType = iota
-	GameTypeStreaming
+	GameTypeGame      GameType = 0
+	GameTypePlaying   GameType = 0
+	GameTypeStreaming GameType = 1
+	GameTypeListening GameType = 2
+	GameTypeWatching  GameType = 3
 )
 
 // A Game struct holds the name of the "playing .." game for a user
