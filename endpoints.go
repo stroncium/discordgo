@@ -129,8 +129,12 @@ var (
 
 	EndpointEmoji = func(eID string) string { return EndpointAPI + "emojis/" + eID + ".png" }
 
-	EndpointOauth2          = EndpointAPI + "oauth2/"
-	EndpointApplications    = EndpointOauth2 + "applications"
-	EndpointApplication     = func(aID string) string { return EndpointApplications + "/" + aID }
-	EndpointApplicationsBot = func(aID string) string { return EndpointApplications + "/" + aID + "/bot" }
+	EndpointOauth2            = EndpointAPI + "oauth2/"
+	EndpointApplications      = EndpointOauth2 + "applications"
+	EndpointApplication       = func(aID string) string { return EndpointApplications + "/" + aID }
+	EndpointApplicationsBot   = func(aID string) string { return EndpointApplications + "/" + aID + "/bot" }
+	EndpointApplicationAssets = func(aID string) string { return EndpointApplications + "/" + aID + "/assets" } //XXX browser used unversioned api, this one gives versioned
+	EndpointApplicationAsset  = func(aID string, assetID string) string {
+		return EndpointApplications + "/" + aID + "/assets/" + assetID
+	} //XXX browser used unversioned api, this one gives versioned
 )

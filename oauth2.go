@@ -124,3 +124,34 @@ func (s *Session) ApplicationBotCreate(appID string) (st *User, err error) {
 	err = unmarshal(body, &st)
 	return
 }
+
+type ApplicationAssetCreateReq struct {
+	Image string `json:"image"`
+	Name  string `json:"name"`
+	Type  string `json:"type"` // always "1" as far as we know
+}
+
+type ApplicationAssetCreateRsp struct {
+	Type int    `json:"type"` // always "1" as far as we know
+	Id   string `json:"id"`
+	Name string `json:"name"`
+}
+
+func (s *Session) ApplicationAssetCreate(appID string, name string, image string) (id string, err error) {
+	body, err := s.RequestWithBucketID("POST", EndpointApplicationAssets(appID), ApplicationAssetCreateReq{
+		Image: image,
+		Name:  name,
+		Type:  "1",
+	}, EndpointApplicationAssets(""))
+	if err != nil {
+		return
+	}
+	var rsp ApplicationAssetCreateRsp
+	err = unmarshal(body, &rsp)
+	if err != nil {
+		return
+	}
+	id = rsp.Id
+	return
+
+}
